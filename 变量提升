@@ -1,0 +1,220 @@
+
+了解JavaScript中的变量提升。了解引擎在幕后的变量和函数声明以及如何导致意外行为。了解可变提升和功能提升之间的区别。
+
+
+可变吊装
+您认为以下代码将如何登录到控制台？猜一猜，然后运行代码进行检查。
+
+
+1
+控制台。log（x）; //  - >？
+2
+var  x  =  5 ;
+3
+控制台。log（x）; //  - >？
+4
+控制台。log（y）; //  - >？
+跑
+登录以保存进度重启
+
+运行时错误
+
+产量
+
+undefined 5
+
+错误
+
+/usercode/__ed_file.js:4 console.log（y）; //  - >？^ ReferenceError：y未在加载器上的Module._compile（module.js：660：30）处的Object。<anonymous>（/ usercode/__ed_file.js:4:13）中定义（/ usr / local / lib / node_modules / babel-register / lib / node.js：144：5）在Object.require.extensions。（匿名函数）[as .js]（/usr/local/lib/node_modules/babel-register/lib/node.js： 154：7）在Module.load（module.js：573：32）的tryModuleLoad（module.js：513：12）位于Function.Module.rload（module.js：505：3）的Function.Module.runMain（ module.js：701：10）在Module._compile上的Object。<anonymous>（/usr/local/lib/node_modules/babel-cli/lib/_babel-node.js:154:22）（module.js：660） ：30）
+
+第二个控制台语句5按预期打印，但第一个打印undefined。但是最后一个语句会输出错误。是什么赋予了？为什么我们看到错误y但不是x？
+
+JavaScript引擎
+这是因为JavaScript引擎在运行代码之前会改变代码的结构。
+
+变量声明被提升或移动到其可用范围的顶部。我们目前处于全球范围，因此它们将被提升到顶峰。我们的Javascript引擎运行的代码看起来更像这样。
+
+
+// -> undefined
+1
+var  x ;
+2
+控制台。log（x）; //  - >未定义
+3
+x  =  5 ;
+4
+控制台。log（x）; //  - > 5
+五
+控制台。log（y）; //  - >未捕获的ReferenceError：y未定义
+跑
+登录以保存进度重启
+请注意，仅提升变量声明，而不是赋值。赋值意味着实际赋予它一个值，而声明意味着创建变量。变量x在代码块的开头声明，但是5直到稍后才会收到值。声明但未分配的变量会自动获取值undefined，这就是我们看到的第一个语句打印到控制台的内容。
+
+我们从来没有声明或赋值y，所以没有什么可以提升，我们看到一个参考错误。
+
+吊装和 var
+未声明使用的变量var不会被提升。我们会收到错误。
+
+
+1
+控制台。log（x）;
+2
+控制台。log（y）;
+3
+​
+4
+var  x  =  '这将记录“undefined”！' ;
+五
+y  =  '这会抛出错误:(' ;
+跑
+登录以保存进度重启
+最佳实践
+由于提升，一些开发人员认为最好的做法是将所有变量声明在其范围的顶部。通过这样做，他们编写的代码更接近引擎对它的解释。所有这四个代码块都与引擎相同。
+
+
+x  =  17 ;
+var  y  =  20 ;
+var  x ;
+​
+​
+x  =  17 ;
+y  =  20 ;
+var  x ;
+var  y ;
+​
+​
+var  x  =  17 ;
+var  y  =  20 ;
+​
+​
+var  x ;
+var  y ;
+x  =  17 ;
+y  =  20 ;
+最后一个块是我们代码的最准确表示。你可能会争辩说，倒数第二个块更短，更易读，你就是对的。由您决定您喜欢哪种款式。只是不要编写看起来像前两个块之一的代码！
+
+功能吊装
+功能提升有点不同。编写函数有两种方法。第一个称为函数表达式。
+
+
+var  fn  =  function（）{
+    // 做一点事...
+}
+第二个称为函数声明。
+
+
+function  fn（）{
+    // 做一点事...
+}
+请注意，此声明定义与变量声明的定义不匹配。
+
+函数表达式就像普通变量一样被提升。变量到达范围的顶部并获取值undefined，稍后在代码中的预期位置设置为函数本身。
+
+另一方面，功能声明完全被提升。变量移动到顶部并立即等于函数。它甚至比正常的变量初始化更高。
+
+例子
+这解释了以下行为。
+
+
+1
+fnDeclaration（）; //  - >这个有效！
+2
+fnExpression（）; //  - >未捕获TypeError：fnExpression不是函数
+3
+​
+4
+function  fnDeclaration（）{
+五
+    控制台。log（'This works！'）;
+6
+}
+7
+​
+8
+var  fnExpression  =  function（）{
+9
+    控制台。log（“这不起作用:(”）;
+10
+}
+跑
+登录以保存进度重启
+完整的例子
+这是代码示例以及编译器将其转换为什么。
+
+
+1
+var  a  =  123 ;
+2
+var  b  =  'abc' ;
+3
+​
+4
+var  fnExpression  =  function（）{
+五
+    var  c  =  456 ;
+6
+    var  d  =  'def' ;
+7
+}
+8
+​
+9
+function  fnDeclaration（）{
+10
+    var  e  =  789 ;
+11
+}
+编译器将运行的此代码的最终版本看起来更像这样。
+
+
+1
+function  fnDeclaration（）{
+2
+    VAR  è ;
+3
+  
+4
+    e  =  789 ;
+五
+}
+6
+​
+7
+var  a ;
+8
+var  b ;
+9
+var  fnExpression ;
+10
+​
+11
+a  =  123 ;
+12
+b  =  'abc' ;
+13
+​
+14
+fnExpression  =  function（）{
+15
+    var  c ;
+16
+    var  d ;
+17
+  
+18
+    c  =  456 ;
+19
+    d  =  'def' ;
+20
+}
+而已。
+
+
+
+
+
+
+
+
+
+
