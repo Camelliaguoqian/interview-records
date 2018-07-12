@@ -1,0 +1,78 @@
+【转】
+一 我们为什么要使用解构
+在学习ES6新的特性解构赋值之前，我们先来看看为什么要使用解构，以前如果我们需要获取对象或者数组里面的数据，并且把它们存入数组，需要写很多代码。如下
+
+const person = {
+  name: 'little bear',
+  age: 18,
+  sex: '男'
+}
+let age = person.age
+let name = person.name
+let sex = person.sex
+可以看到，我们仅仅想从简单对象中获取相应的数据，对需要写很多重复的代码，如果我们仅仅只是想从更复杂的数据结构中获取某一个数据的话，那么可能会需要大量的遍历操作才能够完成。
+基于此，es6为我们推出了解构赋值这个特性。我们可以更简单的获取对象或者数组中的数据。
+
+二 什么是解构
+解构赋值语法是一个Javascript表达式，这使得可以将数据从数组或对象提取到不同的变量中(这段话是mdn中关于解构赋值的定义，注意这里的定义，可以看出解构主要用在数组和对象上)。
+还是上面这个需求，如果我们使用解构赋值的方法，那么书写方式如下
+
+const person = {
+  name: 'little bear',
+  age: 18,
+  sex: '男'
+}
+let { name,age,sex } = person
+对比es6之前的语法，发现获取对象中的数据并存储在变量中是不是变得更简洁了呢？
+
+三 数组的解构
+我们在日常开发中，通常会碰到需要提取数组中的某一项，并把它放在变量中这种需求，那么如何用解构赋值来实现呢？
+
+let nbaStars=['yaoming','kobe','james','paul']
+let [chinaStar,...usaStar] = nbaStars
+let [,,,myidol] = nbaStars
+console.log(usaStar,chinaStar,myidol)
+//output yaoming ['kobe','james','paul'] paul
+还有一种用法，可以交换变量的值，还是上面的例子，如果我想让paul成为中国球星，而姚明变成我最喜欢的球星的话，以前我需要设置一个临时变量，然后通过临时变量让他们交换值，现在可以直接通过解构赋值来交换
+
+[chinaStar,myidol] = [myidol,chinaStar]
+console.log(chinaStar,myidol)
+// paul,yaoming
+从上面的例子中，我们基本上就能看出解构数组的用法，解构数组可以省略参数，可以使用剩余参数。可以通过解构赋值来交换两个变量，是一种非常好的从数组中提取数据的方法。
+
+四 对象的解构
+对象的解构和数组的解构类似，下面举一个例子来看看对象解构和函数解构都用到的情况
+
+const rocketsTeam = {
+    name:rockets,
+    players:[
+      {
+         name:'james harden',
+         age: 18,
+         role: 'sg'
+      },
+      {
+         name:'yao ming',
+         age: 12,
+         role: 'c'
+      }
+    ],
+    city:'houston'
+}
+如果我们要把姚明的角色找出来并存在变量中怎么办呢？es6之前我们需要遍历对象数组才能实现这一需求，看看es6的解构赋值特性有没有帮助到我们吧？
+
+let {players:[,{role:playerRole}]} = rocketsTeam
+console.log(playerRole) 
+//output  C
+不需要遍历数组，我们就得到了我们想得到的东西。
+
+五 总结
+通过上述例子，我们可以看出，解构赋值方便了从数组和对象中提取值，以后有这种需求的时候，首先想到的就是能不能该功能来解决。
+
+
+
+
+
+
+
+
