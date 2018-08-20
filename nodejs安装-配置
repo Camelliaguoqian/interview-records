@@ -1,0 +1,57 @@
+【转】
+【https://jingyan.baidu.com/article/7f41ecec0e3a25593d095c26.html】
+【https://www.cnblogs.com/zhouyu2017/p/6485265.html】
+
+1、安装路径：
+D:\Program Files\nodejs\
+
+2、新建2个文件夹：
+D:\Program Files\nodejs\node_cache
+D:\Program Files\nodejs\node_global
+
+3、先配置npm的全局模块的存放路径以及cache路径：
+npm config set prefix "D:\Program Files\nodejs\node_global"
+npm config set cache "D:\Program Files\nodejs\node_cache"
+
+4、安装express模块。
+命令行里输入npm install express -g
+-g 意思是装在global目录下，即上面的D:\Program Files (x86)\nodejs\node_global；
+
+5、查看是否安装成功。进入到全局的D:\Program Files (x86)\nodejs\node_global目录下，输入node 回车，输入require("express");出现以下信息即安装成功。
+ps:退出nodejs终端命令行，ctrl+D一次 或  ctrl+C两次 或输入“ .exit” 即可
+
+6、express命令的使用，查看版本信息。输入express -V ,提示express不是内部或外部命令。
+因为express4.x中将命令工具分离出来了，所有需要先装express-generator。
+命令行输入：npm install -g express-generator，即安装成功。
+
+
+7、使用express命令前，还需要配置下环境变量。
+打开计算机，系统属性——高级系统设置——环境变量；在系统变量下，新建 NODE_PATH  D:\Program Files\nodejs\node_global\node_modules（全局路径），将“;%NODE_PATH%”到path变量值后面即可。
+
+
+将【用户变量】下的【Path】修改为 D:\Program Files\nodejs\node_global
+（原先为：C:\Users\admin\AppData\Roaming\npm）
+
+
+8、测试express命令。命令行下输入express --version
+显示版本信息: 4.16.0，即安装成功。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
