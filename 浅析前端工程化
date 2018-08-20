@@ -1,0 +1,59 @@
+浅析前端工程化
+【转】【https://www.cnblogs.com/ihardcoder/p/5378290.html】
+面临问题：
+要解决前端工程化的问题，可以从两个角度入手：开发和部署。
+
+从开发角度，要解决的问题包括：
+提高开发生产效率；
+降低维护难度。
+这两个问题的解决方案有两点：
+制定开发规范，提高团队协作能力；
+分治。软件工程中有个很重要的概念叫做模块化开发其中心思想就是分治。
+
+从部署角度，要解决的问题主要是资源管理，包括：
+代码审查；
+压缩打包；
+增量更新；
+单元测试；
+要解决上述问题，需要引入构建/编译阶段。
+
+【开发规范】
+值得一提的是JavaScript的开发规范，尤其是在ES2015越来越普及的局面下，保持良好的编码风格是非常必要的。笔者推荐Airbnb的eslint规范。
+【https://github.com/airbnb/javascript】-Airbnb JavaScript Style Guide() 
+
+
+
+【组件 ？ 模块】
+模块还是组件？----组件黑盒、模块白盒
+
+很多人会混淆模块化开发和组件化开发。但是严格来讲，组件（component）和模块（module）应该是两个不同的概念。两者的区别主要在颗粒度方面。《Documenting Software Architectures》一书中对于component和module的解释如下：
+
+A module tends to refer first and foremost to a design-time entity. ... information hiding as the criterion for allocating responsibility to a module.
+A component tends to refer to a runtime entity. ... The emphasis is clearly on the finished product and not on the design considerations that went into it.
+
+In short, a module suggests encapsulation properties, with less emphasis on the delivery medium and what goest on at runtime. Not so with components. A delivered binary maintains its "separateness" throughout execution. A component suggests independently deployed units of software with no visibility into the development process.
+
+简单讲，module侧重的是对属性的封装，重心是在设计和开发阶段，不关注runtime的逻辑。module是一个白盒；而component是一个可以独立部署的软件单元，面向的是runtime，侧重于产品的功能性。component是一个黑盒，内部的逻辑是不可见的。
+
+用通俗的话讲，模块可以理解为零件，比如轮胎上的螺丝钉；而组件则是轮胎，是具备某项完整功能的一个整体。具体到前端领域，一个button是一个模块，一个包括多个button的nav是一个组件。
+
+模块和组件的争论由来已久，甚至某些编程语言对两者的实现都模糊不清。前端领域也是如此，使用过bower的同行知道bower安装的第三方依赖目录是bower_component；而npm安装的目录是node_modules。也没必要为了这个争得头破血流，一个团队只要统一思想，保证开发效率就可以了。至于是命名为module还是component都无所谓。
+
+
+【构建 ？ 编译】
+严谨地讲，构建（build）和编译（compile）是完全不一样的两个概念。两者的颗粒度不同，compile面对的是单文件的编译，build是建立在compile的基础上，对全部文件进行编译。在很多Java IDE中还有另外一个概念：make。make也是建立在compile的基础上，但是只会编译有改动的文件，以提高生产效率。本文不探讨build、compile、make的深层运行机制，下文所述的前端工程化中构建&编译阶段简称为构建阶段。
+
+大前端体系下，前端开发人员掌握着Node.js搭建的web server层。与上文提到的常规前端开发体系下相比，省略了mock server的角色，但是构建在大前端体系下的作用并没有发生改变。也就是说，不论是大前端还是“小”前端，构建阶段在两种模式下的作用完全一致，构建的作用就是对静态资源以及模板进行处理，换句话说：构建的核心是资源管理。
+
+【http://fis.baidu.com/】-FIS3 , 为你定制的前端工程构建工具
+
+
+
+
+
+
+
+
+
+
+
