@@ -1,0 +1,40 @@
+【转】
+初次接触MockServer，可以用于对前端组件进行测试
+一、概念
+        Mock测试是在测试过程中，用一个虚拟的对象来模拟某些不容易获取或构造的对象，这个虚拟的对象就是mock对象。
+       Mock Server是一种通过接口文档进行测试，将接口与数据进行分离，通过条件和结果数据进行行为的模拟，就想mock对象可以任意模拟对象一样。一般用于前端测试，当后台服务没有完成时，可以通过接口来模拟功能，使得前端与后台服务开发保持一致。
+二、下载
+mock server是一个jar包，下载地址：https://github.com/dreamhead/moco
+
+三、使用
+1.启动mock
+启动服务命令：java -jar moco-runner-<version>-standalone.jar start -p 12306 -c ***.json
+<version>：下载moco的版本号，该版本号为：0.11.1
+12306：是任意指定的端口号，用于显示response
+***.json：代表需要加载的配置文件名，可以自己创建文件，写一个基本的response命令(onecoder.json)
+也可以将启动命令保存在一个文件中，直接运行该文件即可
+chmod 777 文件名：任何人对该文件都有读、写、运行功能
+显示结果为：encoder中的response
+2.简单构造配置文件
+编写json格式文件tester.json：[{“request”:{“url”:”/hello”},”response”:{“text”:”I am a tester"}}]
+如果有多个文件使用同一个mock server，则需要配置全局文件：[{“context”:”/tester”,”include”:”tester.json”},{….}]
+文件位置：将所用到的配置文件与jar包放在同一目录下
+3.加载全局配置文件
+命令：java -jar moco-runner-<version>-standalone.jar start -p 12306 -g onecoder.json
+4.访问服务
+访问路径：http://localhost:12306/tester/hello
+显示结果为：response中的text— I am a tester
+四、不同配置文件格式配置
+1.request配置中带参数
+配置文件：[{ "request" : { "uri" : "/get", "queries": { "name":"onecoder" } }, "response" : { "text" : "Hey." } }]
+访问路径：http://localhost:12306/tester/get?name=onecoder
+访问结果：Hey
+2.template功能
+配置文件：[{“request”:{“url”:”/template”},”response”:{“text”:{“template”:”${req.queries[’name']}"}}}]
+访问路径：http://localhost:12306/template?name=onecoder
+显示结果：onecoder（可以动态的返回参数值）
+3.redirect功能
+配置文件：{ "request" : { "uri" : "/redirect" }, "redirectTo” :"http://www.baidu.com" }
+访问路径：http://localhost:12306/redirect
+访问结果：跳转到http://www.baidu.com网站
+
