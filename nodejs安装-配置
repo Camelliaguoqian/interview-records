@@ -1,6 +1,6 @@
 【转】
 【https://jingyan.baidu.com/article/7f41ecec0e3a25593d095c26.html】
-【https://www.cnblogs.com/zhouyu2017/p/6485265.html】
+【https://blog.csdn.net/henery_002/article/details/78016575】
 
 1、安装路径：
 D:\Program Files\nodejs\
@@ -12,6 +12,10 @@ D:\Program Files\nodejs\node_global
 3、先配置npm的全局模块的存放路径以及cache路径：
 npm config set prefix "D:\Program Files\nodejs\node_global"
 npm config set cache "D:\Program Files\nodejs\node_cache"
+
+然后可以输入指令查看：
+ npm config get prefix 回车
+ npm config get cache 回车
 
 4、安装express模块。
 命令行里输入npm install express -g
