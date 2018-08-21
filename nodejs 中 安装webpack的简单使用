@@ -66,9 +66,19 @@ odejs\node_global\node_modules\webpack\jqueryDem
 
 
 备注：
-cmd命令 【https://www.cnblogs.com/accumulater/p/7110811.html】
+·cmd命令 【https://www.cnblogs.com/accumulater/p/7110811.html】
 ( 几个简单的cmd命令如“ipconfig /all”、“d:”、“dir”，这里多介绍一个电脑自动关机的方法，输入命令“shutdown -s -t 3600”就代表3600秒后关机，也就是一个小时后电脑自动关机哦。 )
-linux命令 【http://www.cnblogs.com/yjd_hycf_space/p/7730690.html】
+·linux命令 【http://www.cnblogs.com/yjd_hycf_space/p/7730690.html】
+
+·webpack-dev-server 是基于node.js Express服务，它同时包含了一个基于 Socket.IO 轻量的运行时环境。
+引用 webpack 和 webpack-dev-server 模块，通过WebpackDevServer启动服务，通过 HotModuleReplacementPlugin 插件启动代码自动编译页面自动刷新。这样，当你修改了html、js或者样式文件，页面会自动编译刷新。
+
+
+
+
+
+
+
 
 
 
