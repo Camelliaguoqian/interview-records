@@ -40,19 +40,51 @@ ps:退出nodejs终端命令行，ctrl+D一次 或  ctrl+C两次 或输入“ .ex
 8、测试express命令。命令行下输入express --version
 显示版本信息: 4.16.0，即安装成功。
 
+==============
+【Node 调试工具入门教程】
+【http://www.ruanyifeng.com/blog/2018/03/node-debugger.html】
+2016年，Node 决定将 Chrome 浏览器的"开发者工具"作为官方的调试工具，使得 Node 脚本也可以使用图形界面调试，这大大方便了开发者。
+
+·新建http.js
+内容如下：
+const http = require('http');
+const hostname = '127.0.0.1';
+const port = 8080;
+const server = http.createServer((req, res) => {
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'text/plain');
+  res.end('Hello World\n');
+});
+server.listen(port, hostname, () => {
+  console.log(`服务器运行在 http://${hostname}:${port}/`);
+  console.log("nodejs搭建本地服务器用作自测");
+});
+
+·启动开发者工具
+现在，运行http.js 
+node --inspect http.js 
+上面代码中，--inspect参数是启动调试模式必需的。这时，打开浏览器访问http://127.0.0.1:8080，就可以看到 Hello World 了。
+
+·接下来，就要开始调试了。一共有两种打开调试工具的方法，第一种是在 Chrome 浏览器的地址栏，键入 chrome://inspect或者about:inspect，回车后就可以看到下面的界面。
+
+在 Target 部分，点击 inspect 链接，就能进入调试工具了。
+第二种进入调试工具的方法，是在 http://127.0.0.1:3000 的窗口打开"开发者工具"，顶部左上角有一个 Node 的绿色标志，点击就可以进入。
+
+备注：
+调试工具窗口
+调试工具其实就是"开发者工具"的定制版，省去了那些对服务器脚本没用的部分。
+它主要有四个面板。
+Console：控制台
+Memory：内存
+Profiler：性能
+Sources：源码
+这些面板的用法，基本上跟浏览器环境差不多，这里只介绍 Sources （源码）面板。
+
+·设置断点
+进入 Sources 面板，找到正在运行的脚本http.js。
 
 
-
-
-
-
-
-
-
-
-
-
-
+·命令行下，按下 ctrl + c，终止运行http.js。
 
 
 
