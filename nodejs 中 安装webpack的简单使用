@@ -38,7 +38,9 @@ cd D:\Program Files\nodejs\node_global\node_modules\webpack\jqueryDemo
 
 2、手动打包,将入口main.js文件为public中的bundle.js ： webpack app/main.js -o public/bundle.js
 
-
+3、通过配置文件进行打包
+cnpm start
+cnpm run dev
 
 
 
@@ -62,6 +64,18 @@ odejs\node_global\node_modules\webpack\jqueryDem
 ·错误原因：当前的webpack版本是最新的，原先的这个命令（webpack app/main.js public/bundle.js ）用不了，需更新。
 ·解决办法：，命令更新为：webpack app/main.js -o public/bundle.js
 
+【3】
+'webpack-dev-server' 不是内部或外部命令，也不是可运行的程序 或批处理文件。
+处理方法：
+将项目里的“node_modules”文件夹删除，然后在cmd中cd到项目目录，依次运行命令：npm install和npm run build，最后运行npm run dev后项目成功运行。
+
+
+【4】
+npm ERR! missing script: build
+
+【5】
+清理cache的命令：
+npm cache verify
 
 
 
@@ -70,11 +84,48 @@ odejs\node_global\node_modules\webpack\jqueryDem
 ( 几个简单的cmd命令如“ipconfig /all”、“d:”、“dir”，这里多介绍一个电脑自动关机的方法，输入命令“shutdown -s -t 3600”就代表3600秒后关机，也就是一个小时后电脑自动关机哦。 )
 ·linux命令 【http://www.cnblogs.com/yjd_hycf_space/p/7730690.html】
 
+===
+npm package.json属性详解
+【https://www.cnblogs.com/tzyy/p/5193811.html】
+===
+
+========
+npm webpack的命令需要和版本保持一致，否则不生效
+========
+
+=============
 ·webpack-dev-server 是基于node.js Express服务，它同时包含了一个基于 Socket.IO 轻量的运行时环境。
 引用 webpack 和 webpack-dev-server 模块，通过WebpackDevServer启动服务，通过 HotModuleReplacementPlugin 插件启动代码自动编译页面自动刷新。这样，当你修改了html、js或者样式文件，页面会自动编译刷新。
+【https://www.cnblogs.com/penghuwan/p/6941616.html】
 
+==================
 
+----------------------------------------------------------
+总结：【https://www.jianshu.com/p/397df5dfd09c】
+1.webpack在全局安装， webpack-dev-server死活不兼容，根本跑不起来（说版本太低了，但是这怎么解决依旧没有找到解决方案，有待解决）
+结论：webpack还是局部安装吧！
 
+2.webpack在局部安装，假设package.json 里面的name为：webpack，那很好又报错了
+将package.json 的name属性修改为：webpackTest, 通过！
+结论：package.json的name属性不能跟webpack命令一样
+
+3.解决问题2后，输入命令webpack，提示webpack command is not found
+
+基于这情况，在package.json下，配置一下命令：
+
+"scripts": {
+   "test": "echo \"Error: no test specified\" && exit 1",
+   "start": "webpack"
+},
+在终端下，执行npm start，开始编译，生成build文件夹
+继续配置webpack-dev-server，package.json入面的配置就不是像教程那样写了，应该为这样
+
+"scripts": {
+   "test": "echo \"Error: no test specified\" && exit 1",
+   "start": "webpack",
+   "dev": "webpack-dev-server --hot --inline"
+}
+在终端下，执行npm run dev，通过！！！！ 在浏览器里输入localhost:8080, HelloWorld出现了！！！！！！
 
 
 
