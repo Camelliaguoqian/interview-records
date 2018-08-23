@@ -133,7 +133,7 @@ npm webpack的命令需要和版本保持一致，否则不生效
 【https://www.npmjs.com/package/windows-node-deps-deleter#readme】
 导致目录太深的原因就是用node中的node_modules引起的, 所以以毒攻毒, 用node解决
 npm install -g windows-node-deps-deleter
-
+wnddel dir1 <dir2 <... <dirN>>>
 
 
 
