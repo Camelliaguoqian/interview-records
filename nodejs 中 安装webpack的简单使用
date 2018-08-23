@@ -1,4 +1,5 @@
 【转】
+官方API【https://www.webpackjs.com/concepts/】
 【https://www.cnblogs.com/wymbk/p/6172208.html】
 【https://segmentfault.com/a/1190000006178770】
 【https://blog.csdn.net/henery_002/article/details/78016575】
@@ -128,6 +129,10 @@ npm webpack的命令需要和版本保持一致，否则不生效
 在终端下，执行npm run dev，通过！！！！ 在浏览器里输入localhost:8080, HelloWorld出现了！！！！！！
 
 
+·Windows中目录及文件路径太长无法删除的解决方法
+【https://www.npmjs.com/package/windows-node-deps-deleter#readme】
+导致目录太深的原因就是用node中的node_modules引起的, 所以以毒攻毒, 用node解决
+npm install -g windows-node-deps-deleter
 
 
 
