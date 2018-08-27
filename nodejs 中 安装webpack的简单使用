@@ -23,14 +23,17 @@ Webpack工作方式
 nodejs环境安装好之后，
 （淘宝npm cmd命令行输入：npm install -g cnpm --registry=https://registry.npm.taobao.org）
 
-·安装webpack
-npm install -g webpack
+·安装webpack和webpack-cli
+cnpm install –save-dev webpack
+cnpm install –save-dev webpack-cli
 
-tips:
-·提示webpack-cli 需全局安装
-【https://segmentfault.com/a/1190000013699050】
-> cnpm install webpack-cli -g
+-------------------------------------------------------------------------------------
+这里的参数–save是要保存到package.json中，dev是在开发时使用这个包，而生产环境中不使用。
 
+开发环境and生产环境：
+开发环境：在开发时需要的环境，这里指在开发时需要依赖的包。
+生产环境：程序开发完成，开始运行后的环境，这里指要使项目运行，所需要的依赖包。
+-------------------------------------------------------------------------------------------
 
 ·项目示例
 1、切换到项目目录：
@@ -134,6 +137,37 @@ npm webpack的命令需要和版本保持一致，否则不生效
 导致目录太深的原因就是用node中的node_modules引起的, 所以以毒攻毒, 用node解决
 npm install -g windows-node-deps-deleter
 wnddel dir1 <dir2 <... <dirN>>>
+
+============================================================================================================================================================
+【https://segmentfault.com/a/1190000012744818】
+【https://webpack.docschina.org/configuration】
+webpack.config.js的四个核心概念
+示例：
+var path = require('path'); #使用Node内置的path模块，并在它前面加上__dirname这个全局变量。可以防止
+不同操作系统之间的文件路径问题，并且可以使用相对路径按照预期工作。
+var webpackConfig = {
+    devtool:'inline-source-map', //开发错误提示，嵌入到源文件
+    entry:{ },  //string | object | array ;这里应用程序开始执行；webpack开始打包
+    output:{ },  //webpack 如何输出结果的相关选项
+    devServer:{ },  //开发服务器配置，
+    module:{         //关于模块配置
+        rules:[]     //模块规则（配置loader、解析器等选项）
+    },
+    plugins:plugins, //附加插件列表
+}
+module.exports = webpackConfig;
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
