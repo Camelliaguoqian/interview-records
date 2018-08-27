@@ -24,7 +24,7 @@ nodejs环境安装好之后，
 （淘宝npm cmd命令行输入：npm install -g cnpm --registry=https://registry.npm.taobao.org）
 
 ·安装webpack
-npm install webpack -g
+npm install -g webpack
 
 tips:
 ·提示webpack-cli 需全局安装
